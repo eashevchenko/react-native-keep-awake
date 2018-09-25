@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 export default class KeepAwake extends Component<{}> {
   static activate() {
@@ -10,6 +10,12 @@ export default class KeepAwake extends Component<{}> {
 
   static deactivate() {
     NativeModules.KCKeepAwake.deactivate();
+  }
+
+  static openFromBackground() {
+    if(Platform.OS === 'android') {
+        NativeModules.KCKeepAwake.openFromBackground();
+    }
   }
 
   componentWillMount() {
